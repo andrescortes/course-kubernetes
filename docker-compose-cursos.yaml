@@ -15,7 +15,7 @@ services:
       - spring
   msvc-cursos:
     container_name: msvc-cursos
-    image: aguzf/cursos:latest
+    image: devcoderjava/courses:v1
 #    build:
 #      context: ./
 #      dockerfile: ./msvc-cursos/Dockerfile

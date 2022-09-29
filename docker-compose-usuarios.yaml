@@ -15,7 +15,7 @@ services:
       - spring
   msvc-usuarios:
     container_name: msvc-usuarios
-    image: aguzf/usuarios:latest
+    image: devcoderjava/users:v3
 #    build:
 #      context: ./
 #      dockerfile: ./msvc-usuarios/Dockerfile

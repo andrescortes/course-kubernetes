@@ -29,7 +29,7 @@ services:
 
   msvc-usuarios:
     container_name: msvc-usuarios
-    image: aguzf/usuarios:latest
+    image: devcoderjava/users:v3
 #    build:
 #      context: ./
 #      dockerfile: ./msvc-usuarios/Dockerfile
@@ -50,7 +50,7 @@ services:
 
   msvc-cursos:
     container_name: msvc-cursos
-    image: aguzf/cursos:latest
+    image: devcoderjava/courses:v1
 #    build:
 #      context: ./
 #      dockerfile: ./msvc-cursos/Dockerfile
