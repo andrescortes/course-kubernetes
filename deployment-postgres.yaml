@@ -19,6 +19,6 @@ spec:
             - containerPort: 5432
           env:
             - name: POSTGRES_PASSWORD
-              value: sasa
+              value: '1003'
             - name: POSTGRES_DB
-              value: msvc_cursos
+              value: msvc_courses
