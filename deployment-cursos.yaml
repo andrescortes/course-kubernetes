@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: msvc-cursos
+  name: msvc-courses
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: msvc-cursos
+      app: msvc-courses
   template:
     metadata:
       labels:
-        app: msvc-cursos
+        app: msvc-courses
     spec:
       containers:
-        - name: cursos
-          image: devcoderjava/courses:v1
+        - name: courses
+          image: devcoderjava/courses:latest
           ports:
             - containerPort: 8002
           env:
@@ -23,10 +23,10 @@ spec:
             - name: DB_HOST
               value: "postgres14:5432"
             - name: DB_DATABASE
-              value: msvc_cursos
+              value: msvc_courses
             - name: DB_USERNAME
               value: postgres
             - name: DB_PASSWORD
-              value: sasa
+              value: '1003'
             - name: USUARIOS_URL
-              value: "msvc-usuarios:8001"
+              value: "msvc-users:8001"

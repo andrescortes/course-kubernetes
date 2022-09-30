@@ -11,8 +11,9 @@ COPY ./$MSVC_NAME/.mvn ./.mvn
 COPY ./$MSVC_NAME/mvnw .
 COPY ./$MSVC_NAME/pom.xml .
 
-RUN ./mvnw clean package -Dmaven.test.skip -Dmaven.main.skip -Dspring-boot.repackage.skip && rm -r ./target/
-#RUN ./mvnw dependency:go-offline
+#RUN ./mvnw clean package -Dmaven.test.skip -Dmaven.main.skip -Dspring-boot.repackage.skip && rm -r ./target/
+RUN sed -i 's/\r$//' mvnw # clean command of chars
+RUN ./mvnw dependency:go-offline
 COPY ./$MSVC_NAME/src ./src
 
 RUN ./mvnw clean package -DskipTests
