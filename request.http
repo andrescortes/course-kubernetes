@@ -1,0 +1,41 @@
+### Get all users from ms-users
+GET http://192.168.55.209:30884
+Content-Type: application/json
+
+### Create a user from ms-users
+POST http://192.168.55.209:30884
+Content-Type: application/json
+
+{
+  "nombre":"pepa",
+  "email":"pepa@gmail.com",
+  "password":"pepa"
+}
+
+
+### Get all courses from ms-courses
+GET http://192.168.55.209:31097
+Content-Type: application/json
+
+### Get details course from ms-courses
+GET http://192.168.55.209:31097/1
+Content-Type: application/json
+
+### Create a course from ms-courses
+POST http://192.168.55.209:31097
+Content-Type: application/json
+
+{
+  "nombre":"Spring-cloud with Kubernetes"
+}
+
+### assign user at course from ms-courses
+PUT http://192.168.55.209:31097/asignar-usuario/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "nombre": "pepa",
+  "email": "pepa@gmail.com",
+  "password": "pepa"
+}
