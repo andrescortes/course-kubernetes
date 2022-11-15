@@ -22,3 +22,11 @@ spec:
               value: '1003'
             - name: POSTGRES_DB
               value: msvc_courses
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: data-postgres
+      volumes:
+        - name: data-postgres
+          hostPath:
+            path: /var/lib/postgresql/data
+            type: DirectoryOrCreate
