@@ -1,6 +1,12 @@
 package org.aguzman.springcloud.msvc.cursos.controllers;
 
 import feign.FeignException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import javax.validation.Valid;
 import org.aguzman.springcloud.msvc.cursos.models.Usuario;
 import org.aguzman.springcloud.msvc.cursos.models.entity.Curso;
 import org.aguzman.springcloud.msvc.cursos.services.CursoService;
@@ -8,10 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CursoController {
