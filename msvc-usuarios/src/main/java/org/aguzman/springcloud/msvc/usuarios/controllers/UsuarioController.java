@@ -1,17 +1,28 @@
 package org.aguzman.springcloud.msvc.usuarios.controllers;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import javax.validation.Valid;
 import org.aguzman.springcloud.msvc.usuarios.models.entity.Usuario;
 import org.aguzman.springcloud.msvc.usuarios.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UsuarioController {
@@ -22,14 +33,23 @@ public class UsuarioController {
     @Autowired
     private ApplicationContext context;
 
+    @Autowired
+    private Environment environment;
+
     @GetMapping("/crash")
     public void crash() {
-        ((ConfigurableApplicationContext)context).close();
+        ((ConfigurableApplicationContext) context).close();
     }
 
     @GetMapping
-    public Map<String, List<Usuario>> listar() {
-        return Collections.singletonMap("users", service.listar());
+    public ResponseEntity<?> listar() {
+        Map<String, Object> body = new HashMap<>();
+        body.put("users", service.listar());
+        body.put("pod_info",
+            environment.getProperty("my_pod_name") + ": " + environment.getProperty("my_pod_ip"));
+        body.put("text", environment.getProperty("config.text"));
+        //return Collections.singletonMap("users", service.listar());
+        return ResponseEntity.ok(body);
     }
 
     @GetMapping("/{id}")

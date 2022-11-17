@@ -6,9 +6,12 @@ data:
   port: "8001"
   db_host: mysql8:3306
   database: msvc_users
-#  username: root
-#  password: "1003"
+  #  username: root
+  #  password: "1003"
   cursos_url: msvc-courses:8002
+  application.yaml: |-
+    config:
+      text: config environment by default
 ---
 apiVersion: v1
 kind: ConfigMap
