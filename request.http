@@ -1,9 +1,25 @@
 ### Get all users from ms-users
-GET http://192.168.55.209:30884
+GET http://172.22.227.100:32586
+Content-Type: application/json
+
+### Get actuator ms-users
+GET http://172.22.227.100:32586/actuator
+Content-Type: application/json
+
+### Get actuator/info ms-users
+GET http://172.22.227.100:32586/actuator/health
+Content-Type: application/json
+
+### Get health readiness ms-users
+GET http://172.22.227.100:32586/actuator/health/readiness
+Content-Type: application/json
+
+### Get health liveness ms-users
+GET http://172.22.227.100:32586/actuator/health/liveness
 Content-Type: application/json
 
 ### Create a user from ms-users
-POST http://192.168.55.209:30884
+POST http://172.22.227.100:32586
 Content-Type: application/json
 
 {
@@ -14,23 +30,71 @@ Content-Type: application/json
 
 
 ### Get all courses from ms-courses
-GET http://192.168.55.209:31097
+GET http://192.168.63.76:32037
 Content-Type: application/json
 
 ### Get details course from ms-courses
-GET http://192.168.55.209:31097/1
+GET http://192.168.63.76:32037/1
 Content-Type: application/json
 
 ### Create a course from ms-courses
-POST http://192.168.55.209:31097
+POST http://192.168.63.76:32540
 Content-Type: application/json
 
 {
-  "nombre":"Spring-cloud with Kubernetes"
+  "nombre":"Spring-cloud"
 }
 
 ### assign user at course from ms-courses
-PUT http://192.168.55.209:31097/asignar-usuario/1
+PUT http://192.168.63.76:32037/asignar-usuario/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "nombre": "pepa",
+  "email": "pepa@gmail.com",
+  "password": "pepa"
+}
+
+### ms-apigateway request GET ms-users
+GET http://172.28.111.13:32584/api/users
+Content-Type: application/json
+
+### ms-apigateway request GET ms-courses
+GET http://172.28.111.13:32584/api/courses
+Content-Type: application/json
+
+### ms-users from aws-eks-ec2, healts
+GET a62961d681961426c92aa5b7a1c2e28b-337051365.us-east-1.elb.amazonaws.com:8001/actuator/health
+Content-Type: application/json
+
+### ms-users from aws-eks-ec2, get users
+GET a62961d681961426c92aa5b7a1c2e28b-337051365.us-east-1.elb.amazonaws.com:8001
+Content-Type: application/json
+
+### ms-users from aws-eks-ec2, create users
+POST a62961d681961426c92aa5b7a1c2e28b-337051365.us-east-1.elb.amazonaws.com:8001
+Content-Type: application/json
+
+{
+  "nombre":"pepa",
+  "email":"pepa@gmail.com",
+  "password":"pepa"
+}
+### ms-courses from aws-eks-ec2, get courses
+GET aeb10319eb7bc403588f8638b704b981-407435847.us-east-1.elb.amazonaws.com:8002
+Content-Type: application/json
+
+### ms-courses from aws-eks-ec2, create course
+POST aeb10319eb7bc403588f8638b704b981-407435847.us-east-1.elb.amazonaws.com:8002
+Content-Type: application/json
+
+{
+  "nombre":"Spring-cloud"
+}
+
+### assign user at course from ms-courses
+PUT aeb10319eb7bc403588f8638b704b981-407435847.us-east-1.elb.amazonaws.com:8002/asignar-usuario/1
 Content-Type: application/json
 
 {
