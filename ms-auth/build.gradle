@@ -2,6 +2,20 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.6'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'com.google.cloud.tools.jib' version '3.3.1'
+}
+
+jib {
+    from {
+        image = "azul/zulu-openjdk-alpine:11"
+    }
+    to {
+        image = "devcoderjava/ms-auth"
+        auth {
+            username = project.property('username')
+            password = project.property('password')
+        }
+    }
 }
 
 group = 'com.dev.springcloud.ms'
@@ -12,10 +26,15 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set('springCloudVersion', "2021.0.1")
+}
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes-client:2.1.5'
+    implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes-client-loadbalancer:2.1.5'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
     testImplementation 'org.springframework.security:spring-security-test'
