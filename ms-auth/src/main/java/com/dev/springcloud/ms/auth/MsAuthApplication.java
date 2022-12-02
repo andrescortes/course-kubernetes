@@ -1,4 +1,4 @@
-package com.dev.springcloud.ms.msauth;
+package com.dev.springcloud.ms.auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

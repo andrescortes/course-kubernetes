@@ -7,7 +7,7 @@ plugins {
 
 jib {
     from {
-        image = "azul/zulu-openjdk-alpine:17"
+        image = "openjdk:17-jdk-alpine"
     }
     to {
         image = "devcoderjava/ms-auth"
@@ -26,9 +26,6 @@ repositories {
     mavenCentral()
 }
 
-ext {
-    set('springCloudVersion', "2021.0.1")
-}
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
