@@ -1,5 +1,5 @@
 ### Get all users from ms-users
-GET http://172.22.227.100:32586
+GET http://172.28.98.230:32586
 Content-Type: application/json
 
 ### Get actuator ms-users
@@ -19,7 +19,7 @@ GET http://172.22.227.100:32586/actuator/health/liveness
 Content-Type: application/json
 
 ### Create a user from ms-users
-POST http://172.22.227.100:32586
+POST http://172.28.98.230:32586
 Content-Type: application/json
 
 {
@@ -57,7 +57,7 @@ Content-Type: application/json
 }
 
 ### ms-apigateway request GET ms-users
-GET http://172.28.111.13:32584/api/users
+GET http://172.28.98.230:32584/api/users
 Content-Type: application/json
 
 ### ms-apigateway request GET ms-courses
@@ -102,4 +102,19 @@ Content-Type: application/json
   "nombre": "pepa",
   "email": "pepa@gmail.com",
   "password": "pepa"
+}
+
+### login ms-users
+GET http://172.28.98.230:32586
+Content-Type: application/json
+
+### create user
+POST http://172.28.98.230:32586
+Content-Type: application/json
+Authorization: "username afef582e-7c67-4701-bf7c-009e3e8f1209"
+
+{
+  "nombre":"pepa",
+  "email":"pepa@gmail.com",
+  "password":"pepa"
 }
