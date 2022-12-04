@@ -1,5 +1,8 @@
 package org.aguzman.springcloud.msvc.cursos.services;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import org.aguzman.springcloud.msvc.cursos.clients.UsuarioClientRest;
 import org.aguzman.springcloud.msvc.cursos.models.Usuario;
 import org.aguzman.springcloud.msvc.cursos.models.entity.Curso;
@@ -8,10 +11,7 @@ import org.aguzman.springcloud.msvc.cursos.repositories.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 @Service
 public class CursoServiceImpl implements CursoService{
@@ -36,15 +36,15 @@ public class CursoServiceImpl implements CursoService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Curso> porIdConUsuarios(Long id) {
+    public Optional<Curso> porIdConUsuarios(Long id,@RequestHeader(value = "Authorization", required = true) String token) {
         Optional<Curso> o = repository.findById(id);
         if (o.isPresent()) {
             Curso curso = o.get();
             if (!curso.getCursoUsuarios().isEmpty()) {
                 List<Long> ids = curso.getCursoUsuarios().stream().map(cu -> cu.getUsuarioId())
-                        .collect(Collectors.toList());
+                    .collect(Collectors.toList());
 
-                List<Usuario> usuarios = client.obtenerAlumnosPorCurso(ids);
+                List<Usuario> usuarios = client.obtenerAlumnosPorCurso(ids, token);
                 curso.setUsuarios(usuarios);
             }
             return Optional.of(curso);
@@ -72,10 +72,10 @@ public class CursoServiceImpl implements CursoService{
 
     @Override
     @Transactional
-    public Optional<Usuario> asignarUsuario(Usuario usuario, Long cursoId) {
+    public Optional<Usuario> asignarUsuario(Usuario usuario, Long cursoId,@RequestHeader(value = "Authorization", required = true) String token) {
         Optional<Curso> o = repository.findById(cursoId);
         if (o.isPresent()) {
-            Usuario usuarioMsvc = client.detalle(usuario.getId());
+            Usuario usuarioMsvc = client.detalle(usuario.getId(), token);
 
             Curso curso = o.get();
             CursoUsuario cursoUsuario = new CursoUsuario();
@@ -91,10 +91,10 @@ public class CursoServiceImpl implements CursoService{
 
     @Override
     @Transactional
-    public Optional<Usuario> crearUsuario(Usuario usuario, Long cursoId) {
+    public Optional<Usuario> crearUsuario(Usuario usuario, Long cursoId,@RequestHeader(value = "Authorization", required = true) String token) {
         Optional<Curso> o = repository.findById(cursoId);
         if (o.isPresent()) {
-            Usuario usuarioNuevoMsvc = client.crear(usuario);
+            Usuario usuarioNuevoMsvc = client.crear(usuario, token);
 
             Curso curso = o.get();
             CursoUsuario cursoUsuario = new CursoUsuario();
@@ -110,10 +110,10 @@ public class CursoServiceImpl implements CursoService{
 
     @Override
     @Transactional
-    public Optional<Usuario> eliminarUsuario(Usuario usuario, Long cursoId) {
+    public Optional<Usuario> eliminarUsuario(Usuario usuario, Long cursoId,@RequestHeader(value = "Authorization", required = true) String token) {
         Optional<Curso> o = repository.findById(cursoId);
         if (o.isPresent()) {
-            Usuario usuarioMsvc = client.detalle(usuario.getId());
+            Usuario usuarioMsvc = client.detalle(usuario.getId(), token);
 
             Curso curso = o.get();
             CursoUsuario cursoUsuario = new CursoUsuario();
